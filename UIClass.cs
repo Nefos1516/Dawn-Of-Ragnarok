@@ -7,30 +7,32 @@ using Terraria.UI;
 
 namespace Dawn_Of_Ragnarok
 {
+    
     internal class BossKilledUI : ModSystem
     {
-    internal UserInterface killedUI;
-    internal BossKilledUIState killedUIState;
-    public override void Load()
-    {
-      if (!Main.dedServ)
-      {
-        killedUI = new UserInterface();
+        
+        internal UserInterface killedUI;
+        internal BossKilledUIState killedUIState;
+        public override void Load()
+        {
+            if (!Main.dedServ)
+            {
+            killedUI = new UserInterface();
 
-        killedUIState = new BossKilledUIState();
-        killedUIState.Activate();
-      }
-    }
-    private GameTime _lastUpdateUiGameTime;
+            killedUIState = new BossKilledUIState();
+            killedUIState.Activate();
+            }
+        }
+        private GameTime _lastUpdateUiGameTime;
 
-    public override void UpdateUI(GameTime gameTime)
-    {
-      _lastUpdateUiGameTime = gameTime;
-      if (killedUI?.CurrentState != null)
-      {
-        killedUI.Update(gameTime);
-      }
-    }
+        public override void UpdateUI(GameTime gameTime)
+        {
+        _lastUpdateUiGameTime = gameTime;
+        if (killedUI?.CurrentState != null)
+        {
+            killedUI.Update(gameTime);
+        }
+        }
     public override void ModifyInterfaceLayers(List<GameInterfaceLayer> layers)
     {
       int mouseTextIndex = layers.FindIndex(layer => layer.Name.Equals("Vanilla: Mouse Text"));
@@ -107,7 +109,7 @@ namespace Dawn_Of_Ragnarok
             {
                 case 4:
                     Main.NewTextMultiline("Eye of Cthulhu had been consumed!\nThe Eye is now locked in cage...", c:Color.MediumVioletRed);
-                    
+                    Globals.consumedBosses.Add(4);
                     break;
                 default:
                     Main.NewText("Not Included Yet");
