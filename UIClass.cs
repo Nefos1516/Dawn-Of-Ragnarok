@@ -63,12 +63,63 @@ namespace Dawn_Of_Ragnarok
   {
         public override void OnInitialize()
         {
-      UIPanel panel = new();
-      panel.Width.Set(600, 0);
-      panel.Height.Set(250, 0);
-      Append(panel);
-      UIText text = new("Hi!!");
-      panel.Append(text);
+            UIPanel panel = new();
+            panel.Width.Set(400, 0);
+            panel.Height.Set(200, 0);
+            panel.HAlign = 0.5f;
+            panel.VAlign = 0.1f;
+            Append(panel);
+            UIText panelText = new("Would you like to consume this boss soul?");
+            panel.Append(panelText);
+            
+
+            UIPanel consumeButton = new();
+            consumeButton.Width.Set(100, 0);
+            consumeButton.Height.Set(25, 0);
+            consumeButton.VAlign = 0.90f;
+            consumeButton.HAlign = 0.95f;
+            consumeButton.OnClick += OnConsume;
+            panel.Append(consumeButton);
+
+            UIText consumeButtonText = new("Yes");
+            consumeButtonText.TextColor = Color.Green;
+            consumeButtonText.VAlign = consumeButtonText.HAlign = 0.5f;
+            consumeButton.Append(consumeButtonText);
+
+            UIPanel refuseButton = new();
+            refuseButton.Width.Set(100, 0);
+            refuseButton.Height.Set(25, 0);
+            refuseButton.VAlign = 0.90f;
+            refuseButton.HAlign = 0.05f;
+            refuseButton.OnClick += OnRefuse;
+            panel.Append(refuseButton);
+
+            UIText refuseButtonText = new("No");
+            refuseButtonText.TextColor = Color.Red;
+            refuseButtonText.VAlign = refuseButtonText.HAlign = 0.5f;
+            refuseButton.Append(refuseButtonText);
         }
+
+        private void OnConsume(UIMouseEvent evt, UIElement listeningElement)
+        {
+            ModContent.GetInstance<BossKilledUI>().HideKilledUI();
+            switch (ModContent.GetInstance<CallForUI>().GetMinionType())
+            {
+                case 4:
+                    Main.NewTextMultiline("Eye of Cthulhu had been consumed!\nThe Eye is now locked in cage...", c:Color.MediumVioletRed);
+                    
+                    break;
+                default:
+                    Main.NewText("Not Included Yet");
+                    break;
+            }
+        }
+
+        private void OnRefuse(UIMouseEvent evt, UIElement listeningElement)
+        {
+            ModContent.GetInstance<BossKilledUI>().HideKilledUI();
+            Main.NewText("Boss had been spared...", Color.Gold);
+        }
+
     }
   }
