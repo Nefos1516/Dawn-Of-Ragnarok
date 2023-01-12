@@ -1,0 +1,3 @@
+displayName = Dawn Of Ragnarok
+author = thatNefos & More
+version = 0.1
