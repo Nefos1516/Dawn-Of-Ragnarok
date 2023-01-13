@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Terraria;
 using Terraria.GameContent.UI.Elements;
 using Terraria.ModLoader;
+using Terraria.ModLoader.IO;
 using Terraria.UI;
 
 namespace Dawn_Of_Ragnarok
@@ -13,6 +14,20 @@ namespace Dawn_Of_Ragnarok
         
         internal UserInterface killedUI;
         internal BossKilledUIState killedUIState;
+        
+        public override void LoadWorldData(TagCompound tag)
+        {
+            Globals.consumedBosses = (List<int>)tag.GetList<int>("consumedBosses");
+        }
+
+        public override void SaveWorldData(TagCompound tag)
+        {
+            if (Globals.consumedBosses != null)
+            {
+                tag["consumedBosses"] = Globals.consumedBosses;
+            }
+        }
+
         public override void Load()
         {
             if (!Main.dedServ)

@@ -37,7 +37,7 @@ namespace Dawn_Of_Ragnarok
             if (Globals.consumedBosses.Contains(npc.type))
             {
                 npc.active = false;
-                Main.NewText("But nobody came...", Color.Black);
+                Main.NewText("But nobody came...", Color.DimGray);
             }
         }
 
