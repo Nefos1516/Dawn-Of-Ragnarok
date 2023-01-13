@@ -14,7 +14,6 @@ namespace Dawn_Of_Ragnarok
         
         internal UserInterface killedUI;
         internal BossKilledUIState killedUIState;
-        
         public override void Load()
         {
             if (!Main.dedServ)
